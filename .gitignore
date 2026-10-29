@@ -1,0 +1,21 @@
+﻿# Raw and staged data files
+*.csv
+/data_staging/
+/data_rejected_review/
+
+# Temporary files
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Generated CSV outputs (review before publishing)
+reports/*.csv
+quality_reports/*.csv
+

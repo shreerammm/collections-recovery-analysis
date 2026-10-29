@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850" role="img" aria-labelledby="title desc">
+<title id="title">Collections Recovery Analysis Architecture</title>
+<desc id="desc">Architecture diagram showing source CSV files flowing through staging and data quality checks into a Golden Dataset, SQL and statistical analysis, and final reports and dashboard.</desc>
+<defs>
+  <style>
+    .bg { fill: #f8fafc; }
+    .heading { font: 700 30px Arial, sans-serif; fill: #172033; }
+    .subtitle { font: 16px Arial, sans-serif; fill: #526078; }
+    .box { fill: #ffffff; stroke: #526078; stroke-width: 2; rx: 16; }
+    .source { fill: #e8f1ff; stroke: #4778c7; }
+    .process { fill: #e9f7f0; stroke: #398567; }
+    .quality { fill: #fff4dc; stroke: #b98220; }
+    .output { fill: #f1eaff; stroke: #8664bc; }
+    .boxTitle { font: 700 19px Arial, sans-serif; fill: #172033; }
+    .body { font: 15px Arial, sans-serif; fill: #334155; }
+    .small { font: 13px Arial, sans-serif; fill: #526078; }
+    .arrow { fill: none; stroke: #526078; stroke-width: 3; marker-end: url(#arrowhead); }
+    .dashed { stroke-dasharray: 8 7; }
+  </style>
+  <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L9,3 z" fill="#526078"/>
+  </marker>
+</defs>
+<rect class="bg" x="0" y="0" width="1400" height="850"/>
+<text class="heading" x="700" y="52" text-anchor="middle">Collections Recovery Analysis — Architecture</text>
+<text class="subtitle" x="700" y="80" text-anchor="middle">Data pipeline, quality controls, analysis, and deliverables</text>
+
+<!-- Sources -->
+<rect class="box source" x="55" y="140" width="260" height="190" rx="16"/>
+<text class="boxTitle" x="185" y="174" text-anchor="middle">1. Source Data</text>
+<text class="body" x="80" y="207">• Accounts and borrowers</text>
+<text class="body" x="80" y="234">• Payments and account history</text>
+<text class="body" x="80" y="261">• Calls, agents, vendors</text>
+<text class="body" x="80" y="288">• Campaigns and targeting</text>
+<text class="small" x="80" y="312">Raw CSV files in project root</text>
+
+<!-- Staging -->
+<rect class="box process" x="385" y="140" width="260" height="190" rx="16"/>
+<text class="boxTitle" x="515" y="174" text-anchor="middle">2. Staging</text>
+<text class="body" x="410" y="207">• Load and standardize files</text>
+<text class="body" x="410" y="234">• Identify exact duplicates</text>
+<text class="body" x="410" y="261">• Preserve review candidates</text>
+<text class="body" x="410" y="288">• Track row counts</text>
+<text class="small" x="410" y="312">data_staging / data_rejected_review</text>
+
+<!-- Quality -->
+<rect class="box quality" x="715" y="140" width="290" height="190" rx="16"/>
+<text class="boxTitle" x="860" y="174" text-anchor="middle">3. Data Quality Checks</text>
+<text class="body" x="740" y="207">• Missing references and IDs</text>
+<text class="body" x="740" y="234">• Duplicate payment identifiers</text>
+<text class="body" x="740" y="261">• Join / borrower attribution</text>
+<text class="body" x="740" y="288">• Status and date consistency</text>
+<text class="small" x="740" y="312">quality_reports</text>
+
+<!-- Golden dataset -->
+<rect class="box process" x="1070" y="140" width="275" height="190" rx="16"/>
+<text class="boxTitle" x="1207" y="174" text-anchor="middle">4. Golden Dataset</text>
+<text class="body" x="1095" y="207">• Payments joined to accounts</text>
+<text class="body" x="1095" y="234">• Retain all payment statuses</text>
+<text class="body" x="1095" y="261">• Add quality flags</text>
+<text class="body" x="1095" y="288">• Keep limitations visible</text>
+<text class="small" x="1095" y="312">reports/golden_payments_dataset.csv</text>
+
+<!-- Top arrows -->
+<path class="arrow" d="M315 235 L378 235"/>
+<path class="arrow" d="M645 235 L708 235"/>
+<path class="arrow" d="M1005 235 L1063 235"/>
+
+<!-- Analysis -->
+<rect class="box source" x="170" y="430" width="310" height="190" rx="16"/>
+<text class="boxTitle" x="325" y="464" text-anchor="middle">5. SQL Analysis</text>
+<text class="body" x="195" y="497">• Payment status distribution</text>
+<text class="body" x="195" y="524">• Monthly successful payments</text>
+<text class="body" x="195" y="551">• Duplicate and missing checks</text>
+<text class="body" x="195" y="578">• Campaign date alignment</text>
+<text class="small" x="195" y="602">sql/ and query result CSVs</text>
+
+<rect class="box source" x="545" y="430" width="310" height="190" rx="16"/>
+<text class="boxTitle" x="700" y="464" text-anchor="middle">6. Statistical / Targeting</text>
+<text class="body" x="570" y="497">• Month-on-month changes</text>
+<text class="body" x="570" y="524">• Trend and sensitivity review</text>
+<text class="body" x="570" y="551">• Targeting / channel summaries</text>
+<text class="body" x="570" y="578">• Association, not causation</text>
+<text class="small" x="570" y="602">src/ and reports/</text>
+
+<rect class="box output" x="920" y="430" width="380" height="190" rx="16"/>
+<text class="boxTitle" x="1110" y="464" text-anchor="middle">7. Deliverables</text>
+<text class="body" x="945" y="497">• Streamlit dashboard</text>
+<text class="body" x="945" y="524">• Data quality report</text>
+<text class="body" x="945" y="551">• Statistical findings and strategy</text>
+<text class="body" x="945" y="578">• Executive summary and notebook</text>
+<text class="small" x="945" y="602">dashboard/ and reports/</text>
+
+<!-- Flow down from golden -->
+<path class="arrow" d="M1207 330 L1207 380 L325 380 L325 423"/>
+<path class="arrow" d="M480 525 L538 525"/>
+<path class="arrow" d="M855 525 L913 525"/>
+
+<!-- Review loop -->
+<rect class="box quality" x="385" y="690" width="620" height="95" rx="16"/>
+<text class="boxTitle" x="695" y="723" text-anchor="middle">Review Loop / Limitations</text>
+<text class="body" x="695" y="750" text-anchor="middle">Investigate mismatches, duplicates, date alignment, and attribution before causal claims</text>
+<text class="small" x="695" y="771" text-anchor="middle">Flags identify items for review; they do not automatically prove invalid data.</text>
+<path class="arrow dashed" d="M1110 620 L1110 654 L1005 654 L1005 737"/>
+<path class="arrow dashed" d="M385 737 L325 737 L325 627"/>
+</svg>
